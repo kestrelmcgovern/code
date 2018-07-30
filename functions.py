@@ -1,8 +1,81 @@
-##    This function takes a note as its input and returns all positions that that note
-##    can be played on on the fretboard
-##    June 13 2018
-##    First Python function!
-##    Better sign my name.... Kestrel McGovern
+def allTheNotes():
+    ##    Number of strings
+    stringNum = 6
+    ##    Number of frets
+    ##    fretNum = 12
+    fretNum = 22
+    ##    Size of matrix holding all notes
+    noteNum = stringNum * fretNum
+
+    ##    Notes
+    ##    low_e_string_notes = ('E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3')
+    ##    A_string_notes = ('A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3')
+    ##    D_string_notes = ('D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4')
+    ##    G_string_notes = ('G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4')
+    ##    B_string_notes = ('B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4')
+    ##    high_E_string_notes = ('E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5')
+
+    low_e_string_notes = (
+    'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3',
+    'A#3', 'B3', 'C4', 'C#4', 'D4')
+    A_string_notes = (
+    'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4',
+    'D#4', 'E4', 'F4', 'F#4', 'G4')
+    D_string_notes = (
+    'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4',
+    'G#4', 'A4', 'A#4', 'B4', 'C5')
+    G_string_notes = (
+    'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5',
+    'C#5', 'D5', 'D#5', 'E5', 'F5')
+    B_string_notes = (
+    'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5',
+    'F5', 'F#5', 'G5', 'G#5', 'A5')
+    high_E_string_notes = (
+    'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5', 'A5',
+    'A#5', 'B5', 'C6', 'C#6', 'D6')
+
+    ##     x defines the number of elements in each tuple, e.g. (x, y, note) where x is the
+    ##     fret number, y is the string number, and note is the note at that point
+    x = list(range(1, 4))
+
+    ##     y is used as an index value
+    y = list(range(0, noteNum + stringNum))
+    ##     w, h are dimensions of x and y
+    w, h = len(x), len(y);
+    ##     z is an empty matrix of tuples the size as defined due to the number of strings and frets
+    z = [[0 for x in range(w)] for y in range(h)]
+
+    ##     ii is for indexing
+    ii = 0
+    ##     j is for indexing
+    j = 1
+    ##    This loop assigns grid references and notes to the matrix for each note
+    while j < stringNum + 1:
+        i = 0
+        while i < fretNum + 1:
+            z[ii][0] = y[i]
+            z[ii][1] = j
+            if j == 6:
+                z[ii][2] = low_e_string_notes[i]
+            elif j == 5:
+                z[ii][2] = A_string_notes[i]
+            elif j == 4:
+                z[ii][2] = D_string_notes[i]
+            elif j == 3:
+                z[ii][2] = G_string_notes[i]
+            elif j == 2:
+                z[ii][2] = B_string_notes[i]
+            elif j == 1:
+                z[ii][2] = high_E_string_notes[i]
+            i = i + 1
+            ii = ii + 1
+        j = j + 1
+
+    return z
+
+
+
+
 
 def findNoteLocations(note):
     ##    Number of strings
