@@ -77,78 +77,7 @@ def allTheNotes():
 
 
 
-def findNoteLocations(note):
-    ##    Number of strings
-    stringNum = 6
-    ##    Number of frets
-    ##    fretNum = 12
-    fretNum = 22
-    ##    Size of matrix holding all notes
-    noteNum = stringNum * fretNum
-
-    ##    Notes
-    ##    low_e_string_notes = ('E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3')
-    ##    A_string_notes = ('A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3')
-    ##    D_string_notes = ('D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4')
-    ##    G_string_notes = ('G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4')
-    ##    B_string_notes = ('B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4')
-    ##    high_E_string_notes = ('E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5')
-
-    low_e_string_notes = (
-    'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3',
-    'A#3', 'B3', 'C4', 'C#4', 'D4')
-    A_string_notes = (
-    'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4',
-    'D#4', 'E4', 'F4', 'F#4', 'G4')
-    D_string_notes = (
-    'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4',
-    'G#4', 'A4', 'A#4', 'B4', 'C5')
-    G_string_notes = (
-    'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5',
-    'C#5', 'D5', 'D#5', 'E5', 'F5')
-    B_string_notes = (
-    'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5',
-    'F5', 'F#5', 'G5', 'G#5', 'A5')
-    high_E_string_notes = (
-    'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5', 'A5',
-    'A#5', 'B5', 'C6', 'C#6', 'D6')
-
-    ##     x defines the number of elements in each tuple, e.g. (x, y, note) where x is the
-    ##     fret number, y is the string number, and note is the note at that point
-    x = list(range(1, 4))
-
-    ##     y is used as an index value
-    y = list(range(0, noteNum + stringNum))
-    ##     w, h are dimensions of x and y
-    w, h = len(x), len(y);
-    ##     z is an empty matrix of tuples the size as defined due to the number of strings and frets
-    z = [[0 for x in range(w)] for y in range(h)]
-
-    ##     ii is for indexing
-    ii = 0
-    ##     j is for indexing
-    j = 1
-    ##    This loop assigns grid references and notes to the matrix for each note
-    while j < stringNum + 1:
-        i = 0
-        while i < fretNum + 1:
-            z[ii][0] = y[i]
-            z[ii][1] = j
-            if j == 6:
-                z[ii][2] = low_e_string_notes[i]
-            elif j == 5:
-                z[ii][2] = A_string_notes[i]
-            elif j == 4:
-                z[ii][2] = D_string_notes[i]
-            elif j == 3:
-                z[ii][2] = G_string_notes[i]
-            elif j == 2:
-                z[ii][2] = B_string_notes[i]
-            elif j == 1:
-                z[ii][2] = high_E_string_notes[i]
-            i = i + 1
-            ii = ii + 1
-        j = j + 1
+def findNoteLocations(note, z):
 
     noteLocations = []
 
@@ -163,7 +92,7 @@ def findNoteLocations(note):
 
 
 ##finds the shortest distance between two sets of x and y coordinates
-def closestDistanceBetweenTwoPoints(a, b):
+def distanceFormula(a, b):
     a = [x for x in a[0:2]]
     b = [x for x in b[0:2]]
 
@@ -195,7 +124,7 @@ def closestDistanceBetweenTwoNotes(a, b):
         j = 0
         while j < b_numberOfPositions:
             ##            this calls the function to measure the distance between the notes
-            x = closestDistanceBetweenTwoPoints(a[i], b[j])
+            x = distanceFormula(a[i], b[j])
             ##            print("the notes are ", a[i], " and ",b[j])
             ##            print("distance between notes is ", round(x,2))
             ##            this ensures that the smallest distance is the returned value
@@ -209,45 +138,45 @@ def closestDistanceBetweenTwoNotes(a, b):
     return distance
 
 
-def closestMelodyNotesDistance(testNotes):
-    ##    This function locates all the places on the neck where a note can be played.
-    ##    It then takes the first two notes and finds the minimum distance between them,
-    ##    considering all the places on the neck where they could be played.
-    ##    Using the first pair of notes as a starting point, the next pair is then decided
-    ##    based on the previous value.  In this way, the closest distance is chosen, based
-    ##    on the preceding choice.
-
-    ##    I think this is called a Greedy Algorithm.  The following definition is from Wikipedia:
-
-    ##    A greedy algorithm is an algorithmic paradigm that follows the problem solving
-    ##    heuristic of making the locally optimal choice at each stage with the intent of
-    ##    finding a global optimum.
-
-    noteLocations = [[]]
-
-    ## Creates an array of all the notes' locations
-    g = 0
-    while g < len(testNotes):
-        noteLocations.append([])
-        noteLocations[g] = findNoteLocations(testNotes[g])
-        g = g + 1
-
-    ##  Finds the closest distance between every pair of notes
-    notePairs = [[]]
-    notePairs[0] = closestDistanceBetweenTwoNotes(noteLocations[0], noteLocations[1])
-    d = 1
-    while d < len(testNotes) - 1:
-        notePairs.append(closestDistanceBetweenTwoNotes([notePairs[d - 1][2]], noteLocations[d + 1]))
-        d = d + 1
-
-    ##  This adds all the individual note pairs to one array
-    testNotesClosestLocations = notePairs[0][1:3]
-    d = 1
-    while d < len(testNotes) - 1:
-        testNotesClosestLocations.append(notePairs[d][2])
-        d = d + 1
-
-    return testNotesClosestLocations
+# def closestMelodyNotesDistance(testNotes):
+#     ##    This function locates all the places on the neck where a note can be played.
+#     ##    It then takes the first two notes and finds the minimum distance between them,
+#     ##    considering all the places on the neck where they could be played.
+#     ##    Using the first pair of notes as a starting point, the next pair is then decided
+#     ##    based on the previous value.  In this way, the closest distance is chosen, based
+#     ##    on the preceding choice.
+#
+#     ##    I think this is called a Greedy Algorithm.  The following definition is from Wikipedia:
+#
+#     ##    A greedy algorithm is an algorithmic paradigm that follows the problem solving
+#     ##    heuristic of making the locally optimal choice at each stage with the intent of
+#     ##    finding a global optimum.
+#
+#     noteLocations = [[]]
+#
+#     ## Creates an array of all the notes' locations
+#     g = 0
+#     while g < len(testNotes):
+#         noteLocations.append([])
+#         noteLocations[g] = findNoteLocations(testNotes[g])
+#         g = g + 1
+#
+#     ##  Finds the closest distance between every pair of notes
+#     notePairs = [[]]
+#     notePairs[0] = closestDistanceBetweenTwoNotes(noteLocations[0], noteLocations[1])
+#     d = 1
+#     while d < len(testNotes) - 1:
+#         notePairs.append(closestDistanceBetweenTwoNotes([notePairs[d - 1][2]], noteLocations[d + 1]))
+#         d = d + 1
+#
+#     ##  This adds all the individual note pairs to one array
+#     testNotesClosestLocations = notePairs[0][1:3]
+#     d = 1
+#     while d < len(testNotes) - 1:
+#         testNotesClosestLocations.append(notePairs[d][2])
+#         d = d + 1
+#
+#     return testNotesClosestLocations
 
 
 def printToTab(testNotesClosestLocations):

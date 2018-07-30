@@ -1,13 +1,16 @@
 from functions import findNoteLocations
-from functions import closestDistanceBetweenTwoPoints
+from functions import distanceFormula
 ##from functions import closestDistanceBetweenTwoNotes
 from functions import printToTab
+from functions import allTheNotes
 
 # from functions import closestMelodyNotesDistance
 
 
 # two octave C major scale
 testNotes = ('C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5')
+
+z = allTheNotes()
 
 
 def closestMelodyNotesDistance(testNotes):
@@ -17,7 +20,7 @@ def closestMelodyNotesDistance(testNotes):
     g = 0
     while g < len(testNotes):
         noteLocations.append([])
-        noteLocations[g] = findNoteLocations(testNotes[g])
+        noteLocations[g] = findNoteLocations(testNotes[g], z)
         g = g + 1
 
     ##   print(noteLocations)
@@ -58,7 +61,7 @@ def closestDistanceBetweenTwoNotes(a, b):
         j = 0
         while j < b_numberOfPositions:
             ##            this calls the function to measure the distance between the notes
-            x = closestDistanceBetweenTwoPoints(a[i], b[j])
+            x = distanceFormula(a[i], b[j])
             ##            print("the notes are ", a[i], " and ",b[j])
             ##            print("distance between notes is ", round(x,2))
             ##            this ensures that the smallest distance is the returned value
